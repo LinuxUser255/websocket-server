@@ -10,6 +10,14 @@ A lightweight, asynchronous WebSocket server implementation using Rust and Tokio
 - Connection management with proper error handling
 - Built with Tokio and Tokio-Tungstenite
 
+
+## Architecture
+
+The following flowchart illustrates the server's operation:
+
+![WebSocket Server Flowchart](docs/rust-websocket-server-flowchart.png)
+
+
 ## Requirements
 
 - Rust 2024 edition

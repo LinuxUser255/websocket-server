@@ -35,8 +35,7 @@ async fn handle_connection(stream: tokio::net::TcpStream, addr: SocketAddr) {
     }
 }
 
-// Tokio's async runtime attributed used for running the main function
-#[tokio::main]
+#[tokio::main] // Tokio's async runtime attributed used for running the main function
 async fn main() {
     // Bind to local address and port
     let addr = "127.0.0.1:9001";

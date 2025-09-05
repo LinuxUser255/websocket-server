@@ -3,24 +3,6 @@ use tokio_tungstenite::accept_async;
 use futures::{StreamExt, SinkExt};
 use std::net::SocketAddr;
 
-// Tokio's async runtime attributed used for running the main function
-#[tokio::main]
-async fn main() {
-    // Bind to local address and port
-    let addr = "127.0.0.1:9001";
-    let listener = TcpListener::bind(&addr).await.expect("Can't bind");
-
-    println!("WebSocket server running on ws://{}", addr);
-
-    // Accept incoming connections
-    while let Ok((stream, addr)) = listener.accept().await {
-        println!("New connection from {}", addr);
-
-        // Spawn a new task for each connection: CALLING HANDLE_CONNECTION FUNCTION
-        tokio::spawn(handle_connection(stream, addr));
-    }
-}
-
 // Handle each client connection takes a TCP stream and the client’s address processes messages from the client.
 async fn handle_connection(stream: tokio::net::TcpStream, addr: SocketAddr) {
     // Upgrade TCP stream to WebSocket
@@ -53,31 +35,21 @@ async fn handle_connection(stream: tokio::net::TcpStream, addr: SocketAddr) {
     }
 }
 
+// Tokio's async runtime attributed used for running the main function
+#[tokio::main]
+async fn main() {
+    // Bind to local address and port
+    let addr = "127.0.0.1:9001";
+    let listener = TcpListener::bind(&addr).await.expect("Can't bind");
 
+    println!("WebSocket server running on ws://{}", addr);
 
+    // Accept incoming connections
+    while let Ok((stream, addr)) = listener.accept().await {
+        println!("New connection from {}", addr);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        // Spawn a new task for each connection: CALLING HANDLE_CONNECTION FUNCTION
+        tokio::spawn(handle_connection(stream, addr));
+    }
+}
 
